@@ -1,4 +1,4 @@
-package swaggerui;
+package com.example.esportsbackend.swaggerui;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
