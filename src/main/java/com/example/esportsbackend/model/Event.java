@@ -35,4 +35,14 @@ public class Event {
     joinColumns = @JoinColumn(name = "eid"),
     inverseJoinColumns = @JoinColumn(name = "cid"))
     List<Caster> casters;
+
+    //inverse side of game-event relationship
+    @OneToMany(mappedBy = "event")
+    List<Game> games;
+
+    @OneToMany(mappedBy = "event")
+    List<Matchup> matchups;
+
+    @OneToMany(mappedBy = "events")
+    List<Organizer> organizers;
 }

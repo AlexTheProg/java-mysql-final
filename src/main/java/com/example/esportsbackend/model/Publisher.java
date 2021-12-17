@@ -1,6 +1,7 @@
 package com.example.esportsbackend.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Publisher {
@@ -12,5 +13,8 @@ public class Publisher {
 
     @Column(name = "name")
     public String name;
+
+    @ManyToMany(mappedBy = "publishers")
+    List<Game> games;
 
 }

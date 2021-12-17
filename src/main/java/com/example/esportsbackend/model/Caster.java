@@ -2,6 +2,7 @@ package com.example.esportsbackend.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Caster {
@@ -21,4 +22,7 @@ public class Caster {
 
     @Column(name = "nationality")
     public String nationality;
+
+    @ManyToMany(mappedBy = "casters")
+    List<Event> eventList;
 }

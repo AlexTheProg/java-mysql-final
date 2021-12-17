@@ -19,11 +19,16 @@ public class Player {
     @Column(name = "dob")
     public String dateOfBirth;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tid")
     //direct side -> Join column
-    //bidirectional one-to-many => optimal way to implement one-to-many
+    //bidirectional one-to-many or uni many-to-one in owning side => optimal way to implement one-to-many
     private Team team;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "gid")
+    private Game game;
+
 
     public Player() {}
 

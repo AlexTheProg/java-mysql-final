@@ -21,5 +21,19 @@ public class Team {
     //bidirectional one-to-many
     List<Player> players;
 
+    @ManyToOne
+    @JoinColumn(name = "muid")
+    Matchup matchup;
+
+    @ManyToMany(mappedBy = "teams")
+    List<Game> games;
+
+    @ManyToMany
+    @JoinTable(name = "teams_sponsors",
+    joinColumns = @JoinColumn(name = "tid"),
+    inverseJoinColumns = @JoinColumn(name = "sid"))
+    List<Sponsor> sponsors;
+
+
     public Team() {}
 }

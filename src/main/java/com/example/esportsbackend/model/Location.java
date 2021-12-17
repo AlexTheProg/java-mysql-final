@@ -1,6 +1,7 @@
 package com.example.esportsbackend.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Location {
@@ -17,4 +18,7 @@ public class Location {
 
     @Column(name = "price")
     public Integer price;
+
+    @OneToMany(mappedBy = "location")
+    List<Event> eventList;
 }

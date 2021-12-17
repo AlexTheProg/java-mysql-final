@@ -26,7 +26,11 @@ public class Game {
     List<Publisher> publishers;
 
     @ManyToOne
+    @JoinColumn(name = "eid")
     public Event event;
+
+    @OneToMany(mappedBy = "game")
+    List<Player> players;
 
 
     public Game(){}
