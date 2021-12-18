@@ -2,6 +2,8 @@ package com.example.esportsbackend.repository;
 
 import com.example.esportsbackend.model.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface EventRepository extends JpaRepository<Long, Event> {
+@Repository
+public interface EventRepository extends JpaRepository<Event, Long> {
 }
