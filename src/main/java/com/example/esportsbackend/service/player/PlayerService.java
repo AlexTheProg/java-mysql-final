@@ -1,9 +1,6 @@
 package com.example.esportsbackend.service.player;
 
-import com.example.esportsbackend.model.Game;
 import com.example.esportsbackend.model.Player;
-import com.example.esportsbackend.model.Team;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

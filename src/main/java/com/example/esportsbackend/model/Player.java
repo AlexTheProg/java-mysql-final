@@ -19,6 +19,8 @@ public class Player {
     @Column(name = "dob")
     public String dateOfBirth;
 
+    public String gameToPlay;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tid")
     //direct side -> Join column
@@ -31,6 +33,14 @@ public class Player {
 
     public Long getId() {
         return id;
+    }
+
+    public String getGameToPlay() {
+        return gameToPlay;
+    }
+
+    public void setGameToPlay(String gameToPlay) {
+        this.gameToPlay = gameToPlay;
     }
 
     public void setId(Long id) {
