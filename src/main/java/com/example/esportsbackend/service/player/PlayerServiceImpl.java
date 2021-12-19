@@ -22,15 +22,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
 
-    @Override
-    public List<Player> getAllPlayersByGame(String game) {
-        return playerRepo.getAllByGame(game);
-    }
 
-    @Override
-    public List<Player> getAllPlayersByTeam(String team) {
-        return playerRepo.getAllByTeam(team);
-    }
 
     @Override
     public Player addPlayerToTeam() {

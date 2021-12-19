@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface PlayerService {
     List<Player> getAllPlayers();
-    List<Player> getAllPlayersByGame(String game);
-    List<Player> getAllPlayersByTeam(String team);
     Player addPlayerToTeam(); //this will also add a game to the newly added player
     //a new player comes in, if he has a game, the game must match the game of the team
     //if the player doesnt have a game, then he is considered a trainee and will be given

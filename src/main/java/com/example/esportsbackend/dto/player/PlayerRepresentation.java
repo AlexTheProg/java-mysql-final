@@ -35,7 +35,6 @@ public class PlayerRepresentation {
         player.setId(playerReferentialNumber);
         player.setName(name);
         player.setSurname(surname);
-        player.setGameToPlay(request.game);
 
         return player;
     }

@@ -12,15 +12,6 @@ import java.util.List;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Long> {
 
-    List<Player> getAllByTeam(String team);
-
-//    @Query(nativeQuery = true, value = "select Player.name, Player.surname, Game.name from Player \n" +
-//            "join Game on Player.gid = Game.gid" +
-//            " where Game.name = :game")
-//    List<Player> getAllByGame(@Param("game") String game);
-
-    @Query("select p.name, p.surname, g.name from Player p join Game g on p.id = g.id where g.name = :game")
-    List<Player> getAllByGame(@Param("game") String game);
 
     @Query("select p from Player p")
     List<Player> getAll();
