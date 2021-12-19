@@ -1,4 +1,4 @@
-package com.example.esportsbackend.dto;
+package com.example.esportsbackend.dto.player;
 
 import com.example.esportsbackend.model.Player;
 import io.swagger.annotations.ApiModel;
