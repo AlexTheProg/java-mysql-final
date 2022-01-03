@@ -30,15 +30,5 @@ public class PlayerRepresentation {
         return player;
     }
 
-    public Player toPlayerFromPlayerWithGame(PlayerWithGame request){
-        Player player = new Player();
-        player.setId(playerReferentialNumber);
-        player.setName(name);
-        player.setSurname(surname);
-
-        return player;
-    }
-
-
 
 }

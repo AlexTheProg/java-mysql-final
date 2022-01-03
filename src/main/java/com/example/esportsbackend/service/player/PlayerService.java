@@ -1,12 +1,16 @@
 package com.example.esportsbackend.service.player;
 
+import com.example.esportsbackend.dto.player.PlayerRepresentation;
 import com.example.esportsbackend.model.Player;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 
 public interface PlayerService {
     List<Player> getAllPlayers();
+    ResponseEntity<Player> addAPlayer(PlayerRepresentation playerRequest);
+    ResponseEntity<Player> updateAPlayer(PlayerRepresentation playerRequest);
     Player addPlayerToTeam(); //this will also add a game to the newly added player
     //a new player comes in, if he has a game, the game must match the game of the team
     //if the player doesnt have a game, then he is considered a trainee and will be given
