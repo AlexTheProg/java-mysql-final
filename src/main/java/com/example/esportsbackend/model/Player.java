@@ -1,6 +1,7 @@
 package com.example.esportsbackend.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 public class Player {
@@ -18,6 +19,9 @@ public class Player {
 
     @Column(name = "dob")
     public String dateOfBirth;
+
+    @Column(name = "joined_at")
+    public Timestamp joined_at;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -50,6 +54,14 @@ public class Player {
 
     public String getSurname() {
         return surname;
+    }
+
+    public Timestamp getJoined_at() {
+        return joined_at;
+    }
+
+    public void setJoined_at(Timestamp joined_at) {
+        this.joined_at = joined_at;
     }
 
     public void setSurname(String surname) {
