@@ -48,4 +48,8 @@ public class PlayerDTO {
     public void setJoined_at(Timestamp joined_at) {
         this.joined_at = joined_at;
     }
+
+    public String getJoinDateAsString(Timestamp joined_at){
+        return joined_at.toString();
+    }
 }
