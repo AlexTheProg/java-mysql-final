@@ -32,15 +32,17 @@ public class Player {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade({org.hibernate.annotations.CascadeType.DELETE,
+            org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "tid")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     //direct side -> Join column
     //bidirectional one-to-many or uni many-to-one in owning side => optimal way to implement one-to-many
     private Team team;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade({org.hibernate.annotations.CascadeType.DELETE,
+    org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "gid")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Game game;
 
     public Long getId() {

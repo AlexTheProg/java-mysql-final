@@ -2,6 +2,7 @@ package com.example.esportsbackend.service.player;
 
 import com.example.esportsbackend.controller.representation.player.PlayerRepresentation;
 
+import com.example.esportsbackend.handlers.TeamGameException;
 import com.example.esportsbackend.mapper.PlayerMapper2;
 import com.example.esportsbackend.model.Game;
 import com.example.esportsbackend.model.Player;
@@ -11,7 +12,9 @@ import com.example.esportsbackend.repository.PlayerRepository;
 import com.example.esportsbackend.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,16 +70,39 @@ public class PlayerServiceImpl implements PlayerService{
 
     @Override
     public Player addPlayer(PlayerRepresentation playerRepresentation) {
-        return playerRepository.save(mapper.mapToPlayer(playerRepresentation));
+        Team team = teamRepository.findByName(playerRepresentation.team_name);
+        Game game = gameRepository.findGameByName(playerRepresentation.game_name);
+        Player player = mapper.mapToPlayer(playerRepresentation);
+        Map<Long, Long> games_teams = playerRepository.selectFromGames_Teams(team.id, game.id);
+
+        if(!games_teams.isEmpty()) {
+            team.currentMemberNumber++;
+           return playerRepository.save(player);
+        }else{
+            throw new TeamGameException("The team doesnt play the game");
+        }
+
     }
 
     @Override
+    @Transactional
     public Player removePlayer(Long id) {
-        return null;
+        Player player = playerRepository.findPlayerById(id);
+        playerRepository.deletePlayerById(id);
+        return player;
     }
 
     @Override
     public Player updatePlayer(PlayerRepresentation playerRepresentation) {
-        return null;
+        Player oldPlayer = playerRepository.findPlayerById(playerRepresentation.id);
+        PlayerRepresentation oldPlayerRepresentation = mapper.mapToPlayerRepresentation(oldPlayer);
+
+        oldPlayerRepresentation.name = playerRepresentation.name;
+        oldPlayerRepresentation.surname = playerRepresentation.surname;
+        oldPlayerRepresentation.dateOfBirth = playerRepresentation.dateOfBirth;
+        oldPlayerRepresentation.team_name = playerRepresentation.team_name;
+        oldPlayerRepresentation.game_name = playerRepresentation.game_name;
+
+        return addPlayer(oldPlayerRepresentation);
     }
 }

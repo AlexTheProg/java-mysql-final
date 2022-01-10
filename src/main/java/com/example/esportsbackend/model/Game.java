@@ -1,5 +1,7 @@
 package com.example.esportsbackend.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -55,6 +57,8 @@ public class Game {
     public Event event;
 
     @OneToMany(mappedBy = "game")
+    @Cascade({org.hibernate.annotations.CascadeType.DELETE,
+            org.hibernate.annotations.CascadeType.ALL})
     List<Player> players;
 
     @Override

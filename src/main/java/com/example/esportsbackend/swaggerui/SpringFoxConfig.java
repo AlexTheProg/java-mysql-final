@@ -19,7 +19,7 @@ public class SpringFoxConfig {
     @Bean
     public Docket api()
     {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.rsixesl.javafinal.controller"))
                 .paths(PathSelectors.any())
@@ -36,15 +36,17 @@ public class SpringFoxConfig {
 
     private ApiInfo apiInfo()
     {
-        ApiInfo apiInfo = new ApiInfo(
-                "My Project's REST API",
-                "This is a description of your API.",
+        return new ApiInfo(
+                "Esport Backend API",
+                "This API was created as a project for the master's degree at UNIBUC. It aims to " +
+                        "represent a platform where players can sign up to their favorite teams and " +
+                        "play games, register their achievements, gain point, and see the schedule of " +
+                        "their fave pro team",
                 "version-1",
                 "API TOS",
                 "me@wherever.com",
                 "API License",
                 "API License URL"
         );
-        return apiInfo;
     }
 }
