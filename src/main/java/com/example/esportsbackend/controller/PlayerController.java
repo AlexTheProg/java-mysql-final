@@ -4,6 +4,7 @@ import com.example.esportsbackend.controller.representation.player.PlayerReprese
 import com.example.esportsbackend.model.Player;
 import com.example.esportsbackend.service.player.PlayerService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -11,10 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("players")
+@RequestMapping("/players")
 public class PlayerController {
     private PlayerService playerService;
 
@@ -46,7 +48,7 @@ public class PlayerController {
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
     @PostMapping()
-    public ResponseEntity<Player> addPlayer(@RequestBody PlayerRepresentation playerRepresentation){
+    public ResponseEntity<PlayerRepresentation> addPlayer(@RequestBody PlayerRepresentation playerRepresentation){
         return ResponseEntity.ok(playerService.addPlayer(playerRepresentation));
     }
 
@@ -102,7 +104,7 @@ public class PlayerController {
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
     @PutMapping()
-    public ResponseEntity<Player> updatePlayer(@RequestBody PlayerRepresentation playerRepresentation){
+    public ResponseEntity<PlayerRepresentation> updatePlayer(@Valid @RequestBody PlayerRepresentation playerRepresentation){
         return ResponseEntity.ok(playerService.updatePlayer(playerRepresentation));
     }
 
@@ -115,8 +117,8 @@ public class PlayerController {
             @ApiResponse(code = 403, message = "Access denied"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Player> deletePlayer(@PathVariable("id") Long id){
+    @DeleteMapping()
+    public ResponseEntity<PlayerRepresentation> deletePlayer(@RequestParam Long id){
         return ResponseEntity.ok(playerService.removePlayer(id));
     }
 

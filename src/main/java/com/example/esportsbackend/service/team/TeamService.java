@@ -10,8 +10,9 @@ public interface TeamService {
     List<TeamResponseRepresentation> findAllTeams();
     TeamResponseRepresentation findTeamByName(String name);
     List<TeamResponseRepresentation> findTeamsByGame(String game);
-    TeamResponseRepresentation addATeamToThePool(Team team);
-    Team deleteTeamFromThePool(Team team);
+    Team addATeamToThePool(TeamRequestRepresentation teamRequestRepresentation);
+    //TeamResponseRepresentation addGameToTeam(GameRequestRepresentation gameRequestRepresentation);
+    TeamResponseRepresentation deleteTeamFromThePool(Long id);
     Team updateTeam(TeamRequestRepresentation request);
 
 }

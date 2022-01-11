@@ -14,8 +14,8 @@ import java.text.SimpleDateFormat;
 
 
 public class PlayerMapper2 {
-    private TeamRepository teamRepository;
-    private GameRepository gameRepository;
+    private final TeamRepository teamRepository;
+    private final GameRepository gameRepository;
 
     public PlayerMapper2(TeamRepository teamRepository, GameRepository gameRepository){
         this.teamRepository = teamRepository;

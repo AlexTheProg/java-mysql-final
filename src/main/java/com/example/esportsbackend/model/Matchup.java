@@ -23,6 +23,5 @@ public class Matchup {
     @JoinColumn(name = "eid")
     Event event;
 
-    @OneToMany(mappedBy = "matchup")
-    List<Team> teams;
+
 }

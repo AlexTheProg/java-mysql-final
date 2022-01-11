@@ -1,9 +1,13 @@
 package com.example.esportsbackend.model;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Check;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
@@ -17,9 +21,13 @@ public class Player {
     public Long id;
 
     @Column(name = "name")
+    @NotBlank(message = "The player name is mandatory")
+    @Size(min = 2, max = 25)
     public String name;
 
     @Column(name = "surname")
+    @NotBlank(message = "The player surname is mandatory")
+    @Size(min = 2, max = 25)
     public String surname;
 
     @Column(name = "dob")
@@ -32,8 +40,6 @@ public class Player {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @Cascade({org.hibernate.annotations.CascadeType.DELETE,
-            org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "tid")
     //direct side -> Join column
     //bidirectional one-to-many or uni many-to-one in owning side => optimal way to implement one-to-many

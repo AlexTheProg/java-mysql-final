@@ -1,8 +1,10 @@
 package com.example.esportsbackend.mapper;
 
 import com.example.esportsbackend.controller.representation.player.PlayerRepresentation;
+import com.example.esportsbackend.controller.representation.team.TeamRequestRepresentation;
 import com.example.esportsbackend.controller.representation.team.TeamResponseRepresentation;
 import com.example.esportsbackend.model.Game;
+import com.example.esportsbackend.model.Matchup;
 import com.example.esportsbackend.model.Player;
 import com.example.esportsbackend.model.Team;
 import com.example.esportsbackend.repository.GameRepository;
@@ -10,7 +12,9 @@ import com.example.esportsbackend.repository.PlayerRepository;
 import com.example.esportsbackend.repository.TeamRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TeamMapper {
@@ -39,34 +43,38 @@ public class TeamMapper {
 
         //get the player list
 
-        teamResponseRepresentation.player_list = playerRepository.findPlayersByTeam(team)
+        teamResponseRepresentation.player_list = (HashSet<PlayerRepresentation>) playerRepository.findPlayersByTeam(team)
                 .stream()
                 .map(playerMapper::mapToPlayerRepresentation)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
-        List<Team> teamList = new ArrayList<>();
-        teamList.add(team);
+        Set<Team> teamSet = new HashSet<>();
+        teamSet.add(team);
 
-        teamResponseRepresentation.game_names = gameRepository.findGamesByTeamsIn(teamList)
+        teamResponseRepresentation.game_names = (HashSet<String>) gameRepository.findGamesByTeamsIn(teamSet)
                 .stream()
                 .map(Game::getName)
-                .collect(Collectors.toList());
-        teamList.remove(team);
+                .collect(Collectors.toSet());
+        teamSet.remove(team);
 
         return teamResponseRepresentation;
     }
 
-    public Team mapToTeam(TeamResponseRepresentation teamResponseRepresentation){
-        if(teamResponseRepresentation == null){
+    public Team mapToTeam(TeamRequestRepresentation teamRequestRepresentation){
+        if(teamRequestRepresentation == null){
             return null;
         }
 
+
         Team team = new Team();
 
-        team.setName(teamResponseRepresentation.name);
-        team.setCurrentMemberNumber(teamResponseRepresentation.currentMemberNumber);
-        team.setId(teamResponseRepresentation.id);
+       team.name = teamRequestRepresentation.name;
+       team.currentMemberNumber = teamRequestRepresentation.teamMemberNumber;
+       team.id = teamRequestRepresentation.id;
+
+
 
         return team;
     }
+
 }

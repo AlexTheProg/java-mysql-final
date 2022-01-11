@@ -3,6 +3,7 @@ package com.example.esportsbackend.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -46,8 +47,6 @@ public class Team {
     @OneToMany(mappedBy = "team")
     //inverse side
     //bidirectional one-to-many
-    @Cascade({org.hibernate.annotations.CascadeType.DELETE,
-            org.hibernate.annotations.CascadeType.ALL})
     List<Player> players;
 
     @ManyToOne
@@ -76,5 +75,4 @@ public class Team {
         return Objects.hash(id, name, currentMemberNumber, players, matchup, games, sponsors);
     }
 
-    public Team() {}
 }

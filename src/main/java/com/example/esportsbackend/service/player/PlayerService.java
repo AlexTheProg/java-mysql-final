@@ -10,7 +10,7 @@ public interface PlayerService {
     List<PlayerRepresentation> findPlayersByName(String name);
     List<PlayerRepresentation> findPlayersByTeam(String team);
     List<PlayerRepresentation> findPlayersByGame(String game);
-    Player addPlayer(PlayerRepresentation playerRepresentation);
-    Player removePlayer(Long id);
-    Player updatePlayer(PlayerRepresentation playerRepresentation);
+    PlayerRepresentation addPlayer(PlayerRepresentation playerRepresentation);
+    PlayerRepresentation removePlayer(Long id);
+    PlayerRepresentation updatePlayer(PlayerRepresentation playerRepresentation);
 }

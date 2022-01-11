@@ -2,7 +2,6 @@ package com.example.esportsbackend.service.player;
 
 import com.example.esportsbackend.controller.representation.player.PlayerRepresentation;
 
-import com.example.esportsbackend.handlers.TeamGameException;
 import com.example.esportsbackend.mapper.PlayerMapper2;
 import com.example.esportsbackend.model.Game;
 import com.example.esportsbackend.model.Player;
@@ -69,7 +68,7 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public Player addPlayer(PlayerRepresentation playerRepresentation) {
+    public PlayerRepresentation addPlayer(PlayerRepresentation playerRepresentation) {
         Team team = teamRepository.findByName(playerRepresentation.team_name);
         Game game = gameRepository.findGameByName(playerRepresentation.game_name);
         Player player = mapper.mapToPlayer(playerRepresentation);
@@ -77,23 +76,25 @@ public class PlayerServiceImpl implements PlayerService{
 
         if(!games_teams.isEmpty()) {
             team.currentMemberNumber++;
-           return playerRepository.save(player);
+            return mapper.mapToPlayerRepresentation(playerRepository.save(player));
         }else{
-            throw new TeamGameException("The team doesnt play the game");
+           playerRepository.inserIntoGames_Teams(team.id, game.id);
+            return mapper.mapToPlayerRepresentation(playerRepository.save(player));
         }
 
     }
 
     @Override
     @Transactional
-    public Player removePlayer(Long id) {
+    public PlayerRepresentation removePlayer(Long id) {
         Player player = playerRepository.findPlayerById(id);
         playerRepository.deletePlayerById(id);
-        return player;
+        player.getTeam().currentMemberNumber--;
+        return mapper.mapToPlayerRepresentation(player);
     }
 
     @Override
-    public Player updatePlayer(PlayerRepresentation playerRepresentation) {
+    public PlayerRepresentation updatePlayer(PlayerRepresentation playerRepresentation) {
         Player oldPlayer = playerRepository.findPlayerById(playerRepresentation.id);
         PlayerRepresentation oldPlayerRepresentation = mapper.mapToPlayerRepresentation(oldPlayer);
 

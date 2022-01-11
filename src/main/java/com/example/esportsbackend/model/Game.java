@@ -13,7 +13,7 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(unique = true, name = "name")
+    @Column(name = "name", unique = true)
     public String name;
 
     public Long getId() {
