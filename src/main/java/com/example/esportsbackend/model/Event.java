@@ -1,6 +1,8 @@
 package com.example.esportsbackend.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,15 +14,21 @@ public class Event {
     public Long id;
 
     @Column(name = "prize")
+    @NotBlank(message = "The event prize is mandatory")
+    @Size(min = 2, max = 25)
     public Integer prize;
 
     @Column(name = "event_name")
+    @NotBlank(message = "The event name is mandatory")
+    @Size(min = 2, max = 25)
     public String eventName;
 
     @Column(name = "ticket_price")
     public Integer ticketPrice;
 
     @Column(name = "budget")
+    @NotBlank(message = "The budget is mandatory")
+    @Size(min = 2, max = 25)
     public Long budget;
 
     @Column(name = "event_date")

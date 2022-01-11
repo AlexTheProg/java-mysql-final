@@ -1,6 +1,8 @@
 package com.example.esportsbackend.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,9 +14,13 @@ public class Caster {
     public Long id;
 
     @Column(name = "name")
+    @NotBlank(message = "The caster name is mandatory")
+    @Size(min = 2, max = 25)
     public String name;
 
     @Column(name = "surname")
+    @NotBlank(message = "The caster surname is mandatory")
+    @Size(min = 2, max = 25)
     public String surname;
 
     @Column(name = "date_of_birth")

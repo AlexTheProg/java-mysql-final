@@ -3,6 +3,8 @@ package com.example.esportsbackend.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +16,8 @@ public class Game {
     public Long id;
 
     @Column(name = "name", unique = true)
+    @NotBlank(message = "The game name is mandatory")
+    @Size(min = 2, max = 25)
     public String name;
 
     public Long getId() {
