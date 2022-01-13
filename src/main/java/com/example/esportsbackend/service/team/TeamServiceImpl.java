@@ -1,7 +1,6 @@
 package com.example.esportsbackend.service.team;
 
-import com.example.esportsbackend.controller.representation.team.TeamRequestRepresentation;
-import com.example.esportsbackend.controller.representation.team.TeamResponseRepresentation;
+import com.example.esportsbackend.representation.team.TeamResponseRepresentation;
 import com.example.esportsbackend.handlers.exceptions.TeamAlreadyExistsException;
 import com.example.esportsbackend.handlers.exceptions.TeamNotFoundException;
 import com.example.esportsbackend.mapper.TeamMapper;
@@ -12,7 +11,6 @@ import com.example.esportsbackend.repository.PlayerRepository;
 import com.example.esportsbackend.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;

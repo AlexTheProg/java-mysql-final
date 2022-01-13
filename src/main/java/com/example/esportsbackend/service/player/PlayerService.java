@@ -1,7 +1,6 @@
 package com.example.esportsbackend.service.player;
 
-import com.example.esportsbackend.controller.representation.player.PlayerRepresentation;
-import com.example.esportsbackend.model.Player;
+import com.example.esportsbackend.representation.player.PlayerRepresentation;
 
 import java.util.List;
 

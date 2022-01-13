@@ -1,11 +1,10 @@
 package com.example.esportsbackend.controller;
 
-import com.example.esportsbackend.controller.representation.team.TeamRequestRepresentation;
-import com.example.esportsbackend.controller.representation.team.TeamResponseRepresentation;
-import com.example.esportsbackend.controller.representation.team.TeamUpdateRequestRepresentation;
+import com.example.esportsbackend.representation.team.TeamRequestRepresentation;
+import com.example.esportsbackend.representation.team.TeamResponseRepresentation;
+import com.example.esportsbackend.representation.team.TeamUpdateRequestRepresentation;
 import com.example.esportsbackend.handlers.exceptions.InvalidUpdateRequestException;
 import com.example.esportsbackend.mapper.TeamMapper;
-import com.example.esportsbackend.model.Game;
 import com.example.esportsbackend.model.Team;
 import com.example.esportsbackend.service.team.TeamService;
 import io.swagger.annotations.ApiOperation;

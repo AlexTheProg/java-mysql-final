@@ -1,21 +1,17 @@
 package com.example.esportsbackend.mapper;
 
-import com.example.esportsbackend.controller.representation.player.PlayerRepresentation;
-import com.example.esportsbackend.controller.representation.team.TeamRequestRepresentation;
-import com.example.esportsbackend.controller.representation.team.TeamResponseRepresentation;
-import com.example.esportsbackend.controller.representation.team.TeamUpdateRequestRepresentation;
+import com.example.esportsbackend.representation.player.PlayerRepresentation;
+import com.example.esportsbackend.representation.team.TeamRequestRepresentation;
+import com.example.esportsbackend.representation.team.TeamResponseRepresentation;
+import com.example.esportsbackend.representation.team.TeamUpdateRequestRepresentation;
 import com.example.esportsbackend.model.Game;
-import com.example.esportsbackend.model.Matchup;
-import com.example.esportsbackend.model.Player;
 import com.example.esportsbackend.model.Team;
 import com.example.esportsbackend.repository.GameRepository;
 import com.example.esportsbackend.repository.PlayerRepository;
 import com.example.esportsbackend.repository.TeamRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 

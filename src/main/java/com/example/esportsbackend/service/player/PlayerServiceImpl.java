@@ -1,6 +1,6 @@
 package com.example.esportsbackend.service.player;
 
-import com.example.esportsbackend.controller.representation.player.PlayerRepresentation;
+import com.example.esportsbackend.representation.player.PlayerRepresentation;
 
 import com.example.esportsbackend.mapper.PlayerMapper2;
 import com.example.esportsbackend.model.Game;
@@ -9,9 +9,7 @@ import com.example.esportsbackend.model.Team;
 import com.example.esportsbackend.repository.GameRepository;
 import com.example.esportsbackend.repository.PlayerRepository;
 import com.example.esportsbackend.repository.TeamRepository;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.Transactional;
 import java.util.List;

@@ -1,11 +1,9 @@
 package com.example.esportsbackend.service.team;
 
-import com.example.esportsbackend.controller.representation.team.TeamRequestRepresentation;
-import com.example.esportsbackend.controller.representation.team.TeamResponseRepresentation;
+import com.example.esportsbackend.representation.team.TeamResponseRepresentation;
 import com.example.esportsbackend.model.Team;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TeamService {
     List<TeamResponseRepresentation> findAllTeams();

@@ -1,13 +1,11 @@
 package com.example.esportsbackend.mapper;
 
-import com.example.esportsbackend.controller.representation.player.PlayerRepresentation;
+import com.example.esportsbackend.representation.player.PlayerRepresentation;
 import com.example.esportsbackend.model.Game;
 import com.example.esportsbackend.model.Player;
 import com.example.esportsbackend.model.Team;
 import com.example.esportsbackend.repository.GameRepository;
 import com.example.esportsbackend.repository.TeamRepository;
-import org.mapstruct.Mapper;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
