@@ -44,6 +44,11 @@ public class Game {
         this.event = event;
     }
 
+    public Game(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @ManyToMany
     @JoinTable(name = "games_teams",
     joinColumns = @JoinColumn(name = "gid"),

@@ -5,14 +5,15 @@ import com.example.esportsbackend.controller.representation.team.TeamResponseRep
 import com.example.esportsbackend.model.Team;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TeamService {
     List<TeamResponseRepresentation> findAllTeams();
-    TeamResponseRepresentation findTeamByName(String name);
-    List<TeamResponseRepresentation> findTeamsByGame(String game);
-    Team addATeamToThePool(TeamRequestRepresentation teamRequestRepresentation);
+    Team findTeamByName(String name);
+    List<Team> findTeamByGame(String game);
+    Team addATeamToThePool(Team Team);
     //TeamResponseRepresentation addGameToTeam(GameRequestRepresentation gameRequestRepresentation);
-    TeamResponseRepresentation deleteTeamFromThePool(Long id);
-    Team updateTeam(TeamRequestRepresentation request);
+    Team deleteTeamFromThePool(Long id);
+    Team updateTeam(Team team);
 
 }

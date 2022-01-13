@@ -9,7 +9,9 @@ import com.example.esportsbackend.model.Team;
 import com.example.esportsbackend.repository.GameRepository;
 import com.example.esportsbackend.repository.PlayerRepository;
 import com.example.esportsbackend.repository.TeamRepository;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -49,7 +51,7 @@ public class PlayerServiceImpl implements PlayerService{
 
     @Override
     public List<PlayerRepresentation> findPlayersByTeam(String team) {
-        Team teamObj = teamRepository.findByName(team);
+        Team teamObj = teamRepository.findByName(team).orElse(null);
 
         return playerRepository.findPlayersByTeam(teamObj)
                 .stream()
@@ -59,7 +61,7 @@ public class PlayerServiceImpl implements PlayerService{
 
     @Override
     public List<PlayerRepresentation> findPlayersByGame(String game) {
-        Game gameObj = gameRepository.findGameByName(game);
+        Game gameObj = gameRepository.findGameByName(game).orElse(null);
 
         return playerRepository.findPlayersByGame(gameObj)
                 .stream()
@@ -69,8 +71,8 @@ public class PlayerServiceImpl implements PlayerService{
 
     @Override
     public PlayerRepresentation addPlayer(PlayerRepresentation playerRepresentation) {
-        Team team = teamRepository.findByName(playerRepresentation.team_name);
-        Game game = gameRepository.findGameByName(playerRepresentation.game_name);
+        Team team = teamRepository.findByName(playerRepresentation.team_name).orElse(null);
+        Game game = gameRepository.findGameByName(playerRepresentation.game_name).orElse(null);
         Player player = mapper.mapToPlayer(playerRepresentation);
         Map<Long, Long> games_teams = playerRepository.selectFromGames_Teams(team.id, game.id);
 
@@ -88,8 +90,12 @@ public class PlayerServiceImpl implements PlayerService{
     @Transactional
     public PlayerRepresentation removePlayer(Long id) {
         Player player = playerRepository.findPlayerById(id);
-        playerRepository.deletePlayerById(id);
-        player.getTeam().currentMemberNumber--;
+        if(player != null) {
+            Team playerTeam = player.getTeam();
+            playerRepository.deletePlayerById(id);
+            playerTeam.currentMemberNumber--;
+            teamRepository.save(playerTeam);
+        }
         return mapper.mapToPlayerRepresentation(player);
     }
 

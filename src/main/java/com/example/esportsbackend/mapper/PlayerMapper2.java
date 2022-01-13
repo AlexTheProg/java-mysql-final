@@ -8,14 +8,15 @@ import com.example.esportsbackend.repository.GameRepository;
 import com.example.esportsbackend.repository.TeamRepository;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-
+@Component
 public class PlayerMapper2 {
-    private final TeamRepository teamRepository;
-    private final GameRepository gameRepository;
+    private TeamRepository teamRepository;
+    private GameRepository gameRepository;
 
     public PlayerMapper2(TeamRepository teamRepository, GameRepository gameRepository){
         this.teamRepository = teamRepository;
@@ -96,7 +97,7 @@ public class PlayerMapper2 {
             return null;
         }
 
-        return teamRepository.findByName(playerRepresentation.team_name);
+        return teamRepository.findByName(playerRepresentation.team_name).orElse(null);
     }
 
     protected Game playerRepresentationToGame(PlayerRepresentation playerRepresentation) {
@@ -104,6 +105,6 @@ public class PlayerMapper2 {
             return null;
         }
 
-        return gameRepository.findGameByName(playerRepresentation.game_name);
+        return gameRepository.findGameByName(playerRepresentation.game_name).orElse(null);
     }
 }

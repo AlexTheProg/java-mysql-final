@@ -9,11 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
-    Game findGameByName(String name);
+    Optional<Game> findGameByName(String name);
     List<Game> findGamesByTeamsIn(Set<Team> teams);
 
     @Query(nativeQuery = true, value = "select g.name as name from game g inner join games_teams gt on gt.gid = g.gid" +

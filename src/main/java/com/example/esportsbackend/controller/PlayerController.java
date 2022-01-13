@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -104,7 +103,7 @@ public class PlayerController {
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
     @PutMapping()
-    public ResponseEntity<PlayerRepresentation> updatePlayer(@Valid @RequestBody PlayerRepresentation playerRepresentation){
+    public ResponseEntity<PlayerRepresentation> updatePlayer(@RequestBody PlayerRepresentation playerRepresentation){
         return ResponseEntity.ok(playerService.updatePlayer(playerRepresentation));
     }
 
@@ -117,8 +116,8 @@ public class PlayerController {
             @ApiResponse(code = 403, message = "Access denied"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @DeleteMapping()
-    public ResponseEntity<PlayerRepresentation> deletePlayer(@RequestParam Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<PlayerRepresentation> deletePlayer(@PathVariable("id") Long id){
         return ResponseEntity.ok(playerService.removePlayer(id));
     }
 

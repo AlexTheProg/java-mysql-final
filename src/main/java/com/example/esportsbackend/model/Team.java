@@ -3,6 +3,8 @@ package com.example.esportsbackend.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +17,8 @@ public class Team {
     public Long id;
 
     @Column(name = "name", unique = true)
+    @NotBlank(message = "The team name is mandatory")
+    @Size(min = 2, max = 25)
     public String name;
 
     @Column(name = "current_member_number")
@@ -61,6 +65,19 @@ public class Team {
     joinColumns = @JoinColumn(name = "tid"),
     inverseJoinColumns = @JoinColumn(name = "sid"))
     List<Sponsor> sponsors;
+
+    public Team(Long id, String name, Integer currentMemberNumber) {
+        this.id = id;
+        this.name = name;
+        this.currentMemberNumber = currentMemberNumber;
+    }
+
+    public Team(String name, Integer currentMemberNumber) {
+        this.name = name;
+        this.currentMemberNumber = currentMemberNumber;
+    }
+
+    public Team(){}
 
     @Override
     public boolean equals(Object o) {
