@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,13 +23,30 @@ public class Caster {
     public String surname;
 
     @Column(name = "date_of_birth")
-    public LocalDateTime dateOfBirth;
+    public Date dateOfBirth;
 
     @Column(name = "nationality")
     public String nationality;
 
     @ManyToMany(mappedBy = "casters")
     List<Event> eventList;
+
+    public Caster() {}
+
+    public Caster(Long id, String name, String surname, Date dateOfBirth, String nationality) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.dateOfBirth = dateOfBirth;
+        this.nationality = nationality;
+    }
+
+    public Caster(String name, String surname, Date dateOfBirth, String nationality) {
+        this.name = name;
+        this.surname = surname;
+        this.dateOfBirth = dateOfBirth;
+        this.nationality = nationality;
+    }
 
     public Long getId() {
         return id;
@@ -54,11 +72,11 @@ public class Caster {
         this.surname = surname;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

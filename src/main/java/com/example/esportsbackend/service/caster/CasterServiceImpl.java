@@ -20,6 +20,7 @@ public class CasterServiceImpl implements CasterService{
     @Override
     public Caster addCaster(Caster caster) {
         Optional<Caster> existingCaster = casterRepository.findById(caster.getId());
+
         if(existingCaster.isPresent()){
             throw new CasterAlreadyExistsException();
         }

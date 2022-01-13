@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,9 +53,10 @@ CasterMapper casterMapper;
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
     @PostMapping
-    public ResponseEntity<CasterResponseRepresentation> addCaster(CasterCreateRequestRepresentation request){
+    public ResponseEntity<CasterResponseRepresentation> addCaster(@RequestBody CasterCreateRequestRepresentation request){
         Caster caster = casterMapper.fromRequest(request);
         casterService.addCaster(caster);
-        return ResponseEntity.ok(casterMapper.fromCaster(caster));
+        CasterResponseRepresentation response = casterMapper.fromCaster(caster);
+        return ResponseEntity.ok(response);
     }
 }

@@ -8,8 +8,9 @@ import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-@Mapper
-@Component
+import java.time.LocalDateTime;
+
+@Mapper(componentModel = "spring", uses = DateMapper.class)
 public interface CasterMapper {
 
     Caster fromRequest(CasterCreateRequestRepresentation request);
