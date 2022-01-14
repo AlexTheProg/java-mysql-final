@@ -100,7 +100,7 @@ class CasterServiceImplTest {
         when(casterRepository.findByNationality(caster.nationality))
                 .thenReturn(List.of(caster));
 
-        List<Caster> casterList = sut.findByNationalityAndOrName(null, caster.nationality);
+        List<Caster> casterList = sut.findByNameAndNationality(null, caster.nationality);
 
         assertNotNull(casterList);
         assertEquals(1, casterList.size());
@@ -112,7 +112,7 @@ class CasterServiceImplTest {
         when(casterRepository.findByName(caster.name))
                 .thenReturn(List.of(caster));
 
-        List<Caster> casterList = sut.findByNationalityAndOrName(caster.name, null);
+        List<Caster> casterList = sut.findByNameAndNationality(caster.name, null);
 
         assertNotNull(casterList);
         assertEquals(1, casterList.size());
@@ -120,15 +120,26 @@ class CasterServiceImplTest {
     }
 
     @Test
-    void findByNameAndNationality(){
-        when(casterRepository.findByNationalityAndName(caster.name, caster.nationality))
-                .thenReturn(List.of(caster));
+    void shouldFindAllWhenNameAndNationalityAreNull(){
+        when(casterRepository.findAll()).thenReturn(List.of(caster));
 
-        List<Caster> casterList = sut.findByNationalityAndOrName(caster.nationality, caster.name);
+        List<Caster> casterList = sut.findByNameAndNationality(null, null);
 
         assertNotNull(casterList);
         assertEquals(1, casterList.size());
         assertEquals(caster, casterList.get(0));
+    }
+
+    @Test
+    void shouldFindByNameAndNationality(){
+        when(casterRepository.findByNameAndNationality(caster.name, caster.nationality)).thenReturn(List.of(caster));
+
+        List<Caster> casterList = sut.findByNameAndNationality(caster.name, caster.nationality);
+
+        assertNotNull(casterList);
+        assertEquals(1, casterList.size());
+        assertEquals(caster, casterList.get(0));
+
     }
 
     @Test

@@ -72,6 +72,7 @@ public class PlayerServiceImpl implements PlayerService{
         Team team = teamRepository.findByName(playerRepresentation.team_name).orElse(null);
         Game game = gameRepository.findGameByName(playerRepresentation.game_name).orElse(null);
         Player player = mapper.mapToPlayer(playerRepresentation);
+        playerRepository.inserIntoGames_Teams(team.id, game.id);
         Map<Long, Long> games_teams = playerRepository.selectFromGames_Teams(team.id, game.id);
 
         if(!games_teams.isEmpty()) {

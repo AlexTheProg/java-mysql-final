@@ -8,7 +8,7 @@ public interface CasterService {
     Caster addCaster(Caster caster);
     List<Caster> findAll();
     Caster findById(Long id);
-    List<Caster> findByNationalityAndOrName(String name, String nationality);
+    List<Caster> findByNameAndNationality(String name, String nationality);
     Caster updateCaster(Caster caster);
     Caster deleteCaster(Long id);
 }

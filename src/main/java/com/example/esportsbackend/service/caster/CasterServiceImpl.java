@@ -33,12 +33,12 @@ public class CasterServiceImpl implements CasterService{
     }
 
     @Override
-    public List<Caster> findByNationalityAndOrName(String name, String nationality) {
+    public List<Caster> findByNameAndNationality(String name, String nationality) {
         if(name != null){
             if(nationality != null){
-                casterRepository.findByNationalityAndName(nationality, name);
+               return casterRepository.findByNameAndNationality(name, nationality);
             }
-            casterRepository.findByName(name);
+            return casterRepository.findByName(name);
         }
         if(nationality != null){
             return casterRepository.findByNationality(nationality);

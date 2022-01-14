@@ -74,7 +74,7 @@ CasterMapper casterMapper;
     @GetMapping("/searchBy")
     public List<Caster> getCastersByNameAndNationality(@RequestParam(required = false) String name,
                                    @RequestParam(required = false) String nationality){
-        return casterService.findByNationalityAndOrName(name, nationality);
+        return casterService.findByNameAndNationality(name, nationality);
     }
 
     @ApiOperation(
