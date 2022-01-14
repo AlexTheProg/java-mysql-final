@@ -19,12 +19,6 @@ public class CasterServiceImpl implements CasterService{
 
     @Override
     public Caster addCaster(Caster caster) {
-        Optional<Caster> existingCaster = casterRepository.findById(caster.getId());
-
-        if(existingCaster.isPresent()){
-            throw new CasterAlreadyExistsException();
-        }
-
         return casterRepository.save(caster);
     }
 
@@ -34,27 +28,43 @@ public class CasterServiceImpl implements CasterService{
     }
 
     @Override
-    public List<Caster> findByName(String name) {
-        return casterRepository.findByName(name);
-    }
-
-    @Override
     public Caster findById(Long id) {
         return casterRepository.findById(id).orElseThrow(CasterNotFoundException::new);
     }
 
     @Override
-    public List<Caster> findByNationality(String nationality) {
-        return casterRepository.findByNationality(nationality);
+    public List<Caster> findByNationalityAndOrName(String name, String nationality) {
+        if(name != null){
+            if(nationality != null){
+                casterRepository.findByNationalityAndName(nationality, name);
+            }
+            casterRepository.findByName(name);
+        }
+        if(nationality != null){
+            return casterRepository.findByNationality(nationality);
+        }
+        return casterRepository.findAll();
     }
+
 
     @Override
     public Caster updateCaster(Caster caster) {
-        return null;
+        Optional<Caster> existingCaster = casterRepository.findById(caster.id);
+
+        if(existingCaster.isEmpty()){
+            throw new CasterNotFoundException();
+        }
+        return casterRepository.save(caster);
     }
 
     @Override
     public Caster deleteCaster(Long id) {
-        return null;
+        Optional<Caster> existingCaster = casterRepository.findById(id);
+
+        if(existingCaster.isEmpty()){
+            throw new CasterNotFoundException();
+        }
+       return casterRepository.deleteCasterById(id);
     }
+
 }

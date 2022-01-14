@@ -7,9 +7,8 @@ import java.util.List;
 public interface CasterService {
     Caster addCaster(Caster caster);
     List<Caster> findAll();
-    List<Caster> findByName(String name);
     Caster findById(Long id);
-    List<Caster> findByNationality(String nationality);
+    List<Caster> findByNationalityAndOrName(String name, String nationality);
     Caster updateCaster(Caster caster);
     Caster deleteCaster(Long id);
 }

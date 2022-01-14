@@ -17,7 +17,7 @@ public interface CasterMapper {
 
     CasterResponseRepresentation fromCaster(Caster caster);
 
-
+    Caster fromUpdateRequest(CasterUpdateRequestRepresentation request);
 
 
 }

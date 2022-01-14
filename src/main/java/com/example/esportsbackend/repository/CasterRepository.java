@@ -10,5 +10,6 @@ import java.util.List;
 public interface CasterRepository extends JpaRepository<Caster, Long> {
     List<Caster> findByName(String name);
     List<Caster> findByNationality(String nationality);
-
+    List<Caster> findByNationalityAndName(String name, String nationality);
+    Caster deleteCasterById(Long id);
 }
